@@ -1,0 +1,51 @@
+import time
+import pandas as pd
+from helpers import convert_to_xlsx, combine_workbooks, copy_data, filter_data_to_new_ws, add_column
+
+src_files = [
+    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/KrisShop.csv',
+    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/Pelago.csv',
+    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/Scoot.csv',
+    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/SFCPL and Cadets.csv',
+    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/SIA 1 & 2.csv',
+    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/SIAEC Subsidiaries.csv',
+    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/Vendors.csv'
+]
+dest_file = 'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/Combination.xlsx'
+
+start =  time.time()
+
+# combine all workbooks into a single worksheet
+combine_workbooks(convert_to_xlsx(src_files), dest_file)
+
+# filter the combined worksheet and copy the filtered data into a new worksheet
+def cond1(x):
+    return x == 'Link clicked'
+def cond2(x):
+    return x == 'Actual user activities'
+filter_condition1 = [
+    ('Response', cond1),
+    ('Sandbox Detected Status', cond2)
+]
+filter_data_to_new_ws(dest_file, 'Combined Data', 'Filtered data',filter_condition1)
+
+# add Duplicates column and count the number of appearances of each email
+add_column(dest_file, 'Filtered data', 'Duplicates')
+
+# filter Duplicates column and add to new worksheet Phished
+def cond3(x):
+    return x == 1
+filter_condition2 = [
+    ('Duplicates', cond3)
+]
+filter_data_to_new_ws(dest_file, 'Filtered data', 'Phished', filter_condition2)
+
+# filter Duplicates column and add to new worksheet Duplicates
+def cond4(x):
+    return x != 1
+filter_condition3 = [
+    ('Duplicates', cond4)
+]
+filter_data_to_new_ws(dest_file, 'Filtered data', 'Duplicates', filter_condition3)
+end = time.time()
+print(end - start)
