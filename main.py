@@ -3,15 +3,12 @@ import pandas as pd
 from helpers import convert_to_xlsx, combine_workbooks, copy_data, filter_data_to_new_ws, add_column
 
 src_files = [
-    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/KrisShop.csv',
-    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/Pelago.csv',
-    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/Scoot.csv',
-    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/SFCPL and Cadets.csv',
-    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/SIA 1 & 2.csv',
-    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/SIAEC Subsidiaries.csv',
-    'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/Vendors.csv'
+    # src file paths
+    # e.g.'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/KrisShop.csv'
 ]
-dest_file = 'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/Combination.xlsx'
+# destination file path'
+dest_file = ''
+
 
 start =  time.time()
 
