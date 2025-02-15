@@ -4,7 +4,6 @@ from helpers import convert_to_xlsx, combine_workbooks, copy_data, filter_data_t
 
 src_files = [
     # src file paths
-    # e.g.'C:/Users/9DingZheng_Lee/Desktop/Phishing Automation/KrisShop.csv'
 ]
 # destination file path'
 dest_file = ''
